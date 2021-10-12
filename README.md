@@ -14,7 +14,8 @@ starter code for a Go system tray application with Gin
 
 ``` bash
 # install air cli
-curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s
-# install go dependencies
+curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
+# install dependencies
+npm install
 go mod tidy
 ```

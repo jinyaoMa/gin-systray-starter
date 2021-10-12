@@ -1,6 +1,8 @@
 package services
 
-import "this/server/models"
+import (
+	"this/database/models"
+)
 
 type TestService struct {
 	// msg *string `json:"msg"`
