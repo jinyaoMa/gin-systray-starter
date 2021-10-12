@@ -10,7 +10,7 @@ import (
 func TestController(c *gin.Context) {
 	var testService services.TestService
 
-	err := c.ShouldBindJSON(&testService)
+	err := c.ShouldBind(&testService)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
