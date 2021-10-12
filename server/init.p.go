@@ -12,11 +12,9 @@ type Server struct {
 }
 
 func (s *Server) Run() {
-	go func() {
-		if err := s.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			log.Fatalf("listen: %s\n", err)
-		}
-	}()
+	if err := s.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+		log.Fatalf("listen: %s\n", err)
+	}
 }
 
 func (s *Server) Stop() {

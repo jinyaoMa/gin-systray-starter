@@ -2,25 +2,16 @@ package server
 
 import (
 	"net/http"
+	"this/database"
+	"this/server/models"
 
 	"github.com/gin-gonic/gin"
-
-	"this/database"
-
-	"this/server/controllers"
-	"this/server/middlewares"
-	"this/server/models"
 )
 
 func New() *Server {
-	router := gin.Default()
+	r := gin.Default()
 
-	router.Use(middlewares.TestMiddleware())
-
-	api := router.Group("api")
-	{
-		api.GET("/test", controllers.TestController)
-	}
+	init_router(r)
 
 	database.DB.AutoMigrate(
 		&models.TestModel{},
@@ -29,7 +20,7 @@ func New() *Server {
 	return &Server{
 		Server: &http.Server{
 			Addr:    ":8080",
-			Handler: router,
+			Handler: r,
 		},
 	}
 }
