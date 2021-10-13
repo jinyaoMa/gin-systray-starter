@@ -5,7 +5,7 @@ import (
 )
 
 type TestService struct {
-	msg *string `json:"msg"`
+	msg *string `query:"msg"`
 }
 
 func (ts *TestService) GetAllTestModels() (testModels []*models.TestModel, err error) {

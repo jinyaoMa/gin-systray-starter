@@ -1,0 +1,40 @@
+info:
+  contact:
+    name: Github Issues
+    url: https://github.com/jinyaoMa/gin-systray-starter/issues
+  description: '"Starter code for Go application with Gin, System Tray, Gorm, Air,
+    Swagger"'
+  license:
+    name: MIT
+    url: https://github.com/jinyaoMa/gin-systray-starter/blob/main/LICENSE
+  title: gin-systray-starter
+  version: 1.0.0
+paths:
+  /test/:
+    get:
+      consumes:
+      - text/plain
+      description: Test Controller
+      parameters:
+      - description: Msg
+        in: query
+        name: msg
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{ ok , data }'
+        "400":
+          description: binding error
+        "404":
+          description: '{ error }'
+      summary: TestController
+      tags:
+      - Before Authorization
+securityDefinitions:
+  BearerIdAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

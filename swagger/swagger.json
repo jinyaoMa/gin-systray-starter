@@ -1,0 +1,59 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "\"Starter code for Go application with Gin, System Tray, Gorm, Air, Swagger\"",
+        "title": "gin-systray-starter",
+        "contact": {
+            "name": "Github Issues",
+            "url": "https://github.com/jinyaoMa/gin-systray-starter/issues"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://github.com/jinyaoMa/gin-systray-starter/blob/main/LICENSE"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/test/": {
+            "get": {
+                "description": "Test Controller",
+                "consumes": [
+                    "text/plain"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Before Authorization"
+                ],
+                "summary": "TestController",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Msg",
+                        "name": "msg",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{ ok , data }"
+                    },
+                    "400": {
+                        "description": "binding error"
+                    },
+                    "404": {
+                        "description": "{ error }"
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "BearerIdAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}

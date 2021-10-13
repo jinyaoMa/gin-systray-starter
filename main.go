@@ -14,7 +14,7 @@ func main() {
 	flag.Parse()
 
 	if *isDev == 1 {
-		server.Run()
+		server.Start(true)
 	} else {
 		gin.SetMode(gin.ReleaseMode)
 		tray.Run()

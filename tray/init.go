@@ -11,13 +11,14 @@ import (
 var icon []byte
 
 var (
-	serverMenu   *systray.MenuItem
-	serverStart  *systray.MenuItem
-	serverStop   *systray.MenuItem
-	languageMenu *systray.MenuItem
-	languageEn   *systray.MenuItem
-	languageZh   *systray.MenuItem
-	quit         *systray.MenuItem
+	serverMenu      *systray.MenuItem
+	serverStart     *systray.MenuItem
+	serverStartSwag *systray.MenuItem
+	serverStop      *systray.MenuItem
+	languageMenu    *systray.MenuItem
+	languageEn      *systray.MenuItem
+	languageZh      *systray.MenuItem
+	quit            *systray.MenuItem
 
 	serverStatusChannel = make(chan bool, 2)
 )
@@ -46,7 +47,10 @@ func watchClicks() {
 		isServerRunning := server.IsRunning
 		select {
 		case <-serverStart.ClickedCh:
-			server.Run()
+			server.Run(false)
+			isServerRunning = true
+		case <-serverStartSwag.ClickedCh:
+			server.Run(true)
 			isServerRunning = true
 		case <-serverStop.ClickedCh:
 			server.Stop()
@@ -77,10 +81,16 @@ func watchStatus() {
 		var serverStatusMessage, languageStatusMessage string
 		if isServerRunning {
 			serverStart.Disable()
+			serverStartSwag.Disable()
 			serverStop.Enable()
-			serverStatusMessage = getMessage("server-start")
+			if server.HasSwagger {
+				serverStatusMessage = getMessage("server-start-swag")
+			} else {
+				serverStatusMessage = getMessage("server-start")
+			}
 		} else {
 			serverStart.Enable()
+			serverStartSwag.Enable()
 			serverStop.Disable()
 			serverStatusMessage = getMessage("server-stop")
 		}
@@ -106,6 +116,8 @@ func resetLanguage() {
 	serverMenu.SetTooltip(getMessage("server"))
 	serverStart.SetTitle(getMessage("server-start"))
 	serverStart.SetTooltip(getMessage("server-start"))
+	serverStartSwag.SetTitle(getMessage("server-start-swag"))
+	serverStartSwag.SetTooltip(getMessage("server-start-swag"))
 	serverStop.SetTitle(getMessage("server-stop"))
 	serverStop.SetTooltip(getMessage("server-stop"))
 
@@ -125,6 +137,7 @@ func makeTray() {
 
 	serverMenu = systray.AddMenuItem("", "")
 	serverStart = serverMenu.AddSubMenuItemCheckbox("", "", false)
+	serverStartSwag = serverMenu.AddSubMenuItemCheckbox("", "", false)
 	serverStop = serverMenu.AddSubMenuItemCheckbox("", "", false)
 
 	systray.AddSeparator()

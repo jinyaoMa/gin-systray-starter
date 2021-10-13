@@ -4,7 +4,6 @@ import (
 	"context"
 	"log"
 	"net/http"
-	"this/server/routers"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -14,11 +13,13 @@ var router *gin.Engine
 var server *http.Server
 
 var IsRunning = false
+var HasSwagger = false
 
-func Start() {
+func Start(withSwagger bool) {
+	HasSwagger = withSwagger
+
 	router = gin.Default()
-
-	routers.TestRouter(router.Group("/"))
+	Apis(router, HasSwagger)
 
 	server = &http.Server{
 		Addr:    ":8080",
@@ -31,14 +32,14 @@ func Start() {
 	}
 }
 
-func Run() {
+func Run(withSwagger bool) {
 	if IsRunning {
 		return
 	}
 	IsRunning = true
 	log.Println("Server Start!")
 
-	go Start()
+	go Start(withSwagger)
 }
 
 func Stop() {

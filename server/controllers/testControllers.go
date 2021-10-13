@@ -7,6 +7,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @Summary TestController
+// @Description Test Controller
+// @Tags Before Authorization
+// @accept plain
+// @Produce json
+// @Param msg query string false "Msg"
+// @Success 200 "{ ok , data }"
+// @Failure 400 "binding error"
+// @Failure 404 "{ error }"
+// @Router /test/ [get]
 func TestController(c *gin.Context) {
 	var testService services.TestService
 
@@ -20,16 +30,14 @@ func TestController(c *gin.Context) {
 
 	tests, err := testService.GetAllTestModels()
 	if err != nil {
-		c.JSON(http.StatusOK, gin.H{
-			"code":    -1,
-			"message": "GetAllTestModels() error!",
+		c.JSON(http.StatusNotFound, gin.H{
+			"error": "GetAllTestModels() error!",
 		})
 		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"code":    1,
-		"message": "success",
-		"data":    tests,
+		"ok":   true,
+		"data": tests,
 	})
 }
