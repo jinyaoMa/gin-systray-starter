@@ -10,30 +10,50 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+var router *gin.Engine
 var server *http.Server
 
-func init() {
-	r := gin.Default()
+var IsRunning = false
 
-	routers.TestRouter(r.Group("/"))
+func Start() {
+	router = gin.Default()
+
+	routers.TestRouter(router.Group("/"))
 
 	server = &http.Server{
 		Addr:    ":8080",
-		Handler: r,
+		Handler: router,
 	}
-}
 
-func Run() {
-	if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+	err := server.ListenAndServe()
+	if err != nil && err != http.ErrServerClosed {
 		log.Fatalf("listen: %s\n", err)
 	}
 }
 
+func Run() {
+	if IsRunning {
+		return
+	}
+	IsRunning = true
+	log.Println("Server Start!")
+
+	go Start()
+}
+
 func Stop() {
+	if !IsRunning {
+		return
+	}
+
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	if err := server.Shutdown(ctx); err != nil {
+
+	err := server.Shutdown(ctx)
+	if err != nil {
 		log.Fatal("Server Shutdown:", err)
 	}
-	log.Println("Server exiting")
+
+	log.Println("Server Stop!")
+	IsRunning = false
 }

@@ -1,14 +1,22 @@
 package main
 
 import (
-	"os"
+	"flag"
 	"this/server"
+	"this/tray"
+
+	"github.com/gin-gonic/gin"
 )
 
-func main() {
-	if os.Getenv("IS_PRODUCTION") == "1" {
+var isDev = flag.Int("dev", 0, "set to development mode")
 
-	} else {
+func main() {
+	flag.Parse()
+
+	if *isDev == 1 {
 		server.Run()
+	} else {
+		gin.SetMode(gin.ReleaseMode)
+		tray.Run()
 	}
 }

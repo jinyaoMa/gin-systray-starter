@@ -4,7 +4,8 @@
   "description": "starter code for a Go system tray application with Gin",
   "scripts": {
     "serve": "air",
-    "build": "cross-env IS_PRODUCTION=1 && go build -tags=jsoniter -ldflags \"-H=windowsgui\""
+    "build": "go build -tags=jsoniter -ldflags \"-H=windowsgui\" -o ./main.exe .",
+    "build:run": "go build -o ./main.exe . && main"
   },
   "repository": {
     "type": "git",
@@ -15,8 +16,5 @@
   "bugs": {
     "url": "https://github.com/jinyaoMa/gin-systray-starter/issues"
   },
-  "homepage": "https://github.com/jinyaoMa/gin-systray-starter#readme",
-  "devDependencies": {
-    "cross-env": "^7.0.3"
-  }
+  "homepage": "https://github.com/jinyaoMa/gin-systray-starter#readme"
 }
