@@ -1,12 +1,9 @@
 # gin-systray-starter
 
-starter code for a Go system tray application with Gin
+Starter code for Go application with Gin, System Tray, Gorm, Air, Swagger
 
 - [x] systray, [https://github.com/getlantern/systray](https://github.com/getlantern/systray)
 - [x] gin, [https://github.com/gin-gonic/gin](https://github.com/gin-gonic/gin)
-
-## Additions
-
 - [x] air, [https://github.com/cosmtrek/air](https://github.com/cosmtrek/air)
 - [x] gorm, [https://gorm.io/](https://gorm.io/)
 - [x] swagger, [https://github.com/swaggo/gin-swagger](https://github.com/swaggo/gin-swagger)
