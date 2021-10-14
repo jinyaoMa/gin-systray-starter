@@ -63,6 +63,65 @@ var doc = `{
                     }
                 }
             }
+        },
+        "/test/checkToken/": {
+            "get": {
+                "security": [
+                    {
+                        "BearerIdAuth": []
+                    }
+                ],
+                "description": "Test Jwt, check token",
+                "consumes": [
+                    "text/plain"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "After Authorization"
+                ],
+                "summary": "TestJwtCheckToken",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{ ok , claims }"
+                    },
+                    "404": {
+                        "description": "{ error }"
+                    }
+                }
+            }
+        },
+        "/test/getToken/": {
+            "get": {
+                "description": "Test Jwt, get token",
+                "consumes": [
+                    "text/plain"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Before Authorization"
+                ],
+                "summary": "TestJwtGetToken",
+                "responses": {
+                    "200": {
+                        "description": "{ ok , token }"
+                    },
+                    "404": {
+                        "description": "{ error }"
+                    }
+                }
+            }
         }
     },
     "securityDefinitions": {

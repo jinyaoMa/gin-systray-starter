@@ -32,6 +32,43 @@ paths:
       summary: TestController
       tags:
       - Before Authorization
+  /test/checkToken/:
+    get:
+      consumes:
+      - text/plain
+      description: Test Jwt, check token
+      parameters:
+      - description: Authorization
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{ ok , claims }'
+        "404":
+          description: '{ error }'
+      security:
+      - BearerIdAuth: []
+      summary: TestJwtCheckToken
+      tags:
+      - After Authorization
+  /test/getToken/:
+    get:
+      consumes:
+      - text/plain
+      description: Test Jwt, get token
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{ ok , token }'
+        "404":
+          description: '{ error }'
+      summary: TestJwtGetToken
+      tags:
+      - Before Authorization
 securityDefinitions:
   BearerIdAuth:
     in: header

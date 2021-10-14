@@ -13,5 +13,7 @@ func TestRouter(engine *gin.Engine) {
 		g.Use(middlewares.TestMiddleware())
 
 		g.GET("/", controllers.TestController)
+		g.GET("/getToken", controllers.TestJwtGetToken)
+		g.GET("/checkToken", middlewares.Auth(), controllers.TestJwtCheckToken)
 	}
 }

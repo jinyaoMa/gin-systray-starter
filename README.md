@@ -1,13 +1,13 @@
 # gin-systray-starter
 
-Starter code for Go application with Gin, System Tray, Gorm, Air, Swagger
+Starter code for Go application with Gin, System Tray, Gorm, Air, Swagger, JWT
 
 - [x] systray, [https://github.com/getlantern/systray](https://github.com/getlantern/systray)
 - [x] gin, [https://github.com/gin-gonic/gin](https://github.com/gin-gonic/gin)
 - [x] air, [https://github.com/cosmtrek/air](https://github.com/cosmtrek/air)
 - [x] gorm, [https://gorm.io/](https://gorm.io/)
 - [x] swagger, [https://github.com/swaggo/gin-swagger](https://github.com/swaggo/gin-swagger)
-- [ ] jwt
+- [x] jwt, [https://github.com/golang-jwt/jwt](https://github.com/golang-jwt/jwt)
 
 ## System
 
@@ -60,6 +60,7 @@ npm run build
 - /server `init http server`
   - /controllers `actions for each API (request -> services -> response)`
   - /middlewares `hooks/filters/interceptors`
+    - auth.go `jwt declaration and authentication gateway`
   - /routers `groups of APIs`
   - /services `services (involve multiple models) to be used in actions`
   - api.go `swag General API annotations with a set of API routers/groups`
