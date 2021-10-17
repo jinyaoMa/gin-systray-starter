@@ -13,3 +13,5 @@
 
 database.db
 build-errors.log
+
+.vscode
