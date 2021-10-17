@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"net/http"
-	"this/server/middlewares"
+	"this/gate"
 
 	"github.com/gin-gonic/gin"
 )
@@ -15,6 +15,7 @@ import (
 // @Security BearerIdAuth
 // @param Authorization header string false "Authorization"
 // @Success 200 "{ ok , claims }"
+// @Failure 401 "Auth failed"
 // @Failure 404 "{ error }"
 // @Router /test/checkToken/ [get]
 func TestJwtCheckToken(c *gin.Context) {
@@ -25,7 +26,7 @@ func TestJwtCheckToken(c *gin.Context) {
 		})
 		return
 	}
-	claims := temp.(*middlewares.JWTClaims)
+	claims := temp.(*gate.Claims)
 
 	c.JSON(http.StatusOK, gin.H{
 		"ok":     true,

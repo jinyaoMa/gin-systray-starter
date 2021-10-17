@@ -1,7 +1,7 @@
 {
   "name": "gin-systray-starter",
   "version": "1.0.0",
-  "description": "Starter code for Go application with Gin, System Tray, Gorm, Air, Swagger, JWT",
+  "description": "Template/Starter code for Go application with Gin, System Tray, Gorm, Air, Swagger, JWT",
   "scripts": {
     "serve": "air -c air/.air.toml",
     "swag": "swag init -g server/api.go -o ./swagger",

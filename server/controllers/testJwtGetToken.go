@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"net/http"
-	"this/server/middlewares"
+	"this/gate"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -19,7 +19,7 @@ import (
 // @Router /test/getToken/ [get]
 func TestJwtGetToken(c *gin.Context) {
 	now := time.Now()
-	claims := middlewares.JWTClaims{
+	claims := gate.Claims{
 		RegisteredClaims: jwt.RegisteredClaims{
 			ID:       "1",
 			Issuer:   "gin-systray-starter",
@@ -37,10 +37,7 @@ func TestJwtGetToken(c *gin.Context) {
 		},
 	}
 
-	jwToken := middlewares.JWT{
-		SigningKey: []byte(middlewares.DEFAULT_SIGNING_KEY),
-	}
-	token, err := jwToken.CreateToken(claims)
+	token, err := gate.CreateToken(&claims)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{
 			"error": "TestJwtGetToken() error!",

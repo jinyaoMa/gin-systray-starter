@@ -94,6 +94,9 @@ var doc = `{
                     "200": {
                         "description": "{ ok , claims }"
                     },
+                    "401": {
+                        "description": "Auth failed"
+                    },
                     "404": {
                         "description": "{ error }"
                     }

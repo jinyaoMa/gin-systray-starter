@@ -23,23 +23,35 @@ var (
 	serverStatusChannel = make(chan bool, 2)
 )
 
-func Run() {
-	systray.Run(onReady, onExit)
+func Run(onload func()) {
+	systray.Run(onReady(onload), onExit)
 }
 
-func onReady() {
-	makeTray()
-	resetLanguage()
+func onReady(onload func()) func() {
+	return func() {
+		makeTray()
+		resetLanguage()
 
-	go watchClicks()
-	go watchStatus()
+		go watchClicks()
+		go watchStatus()
 
-	serverStatusChannel <- false
+		serverStatusChannel <- false
+
+		onload()
+	}
 }
 
 func onExit() {
 	close(serverStatusChannel)
 	server.Stop()
+}
+
+func StartServer() {
+	serverStart.ClickedCh <- struct{}{}
+}
+
+func StartServerWithSwag() {
+	serverStartSwag.ClickedCh <- struct{}{}
 }
 
 func watchClicks() {

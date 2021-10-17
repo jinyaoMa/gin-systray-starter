@@ -37,7 +37,11 @@ func Run(withSwagger bool) {
 		return
 	}
 	IsRunning = true
-	log.Println("Server Start!")
+	if withSwagger {
+		log.Println("Server With Swagger Start!")
+	} else {
+		log.Println("Server Start!")
+	}
 
 	go Start(withSwagger)
 }
