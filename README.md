@@ -8,6 +8,7 @@ Template/Starter code for Go application with Gin, System Tray, Gorm, Air, Swagg
 - [x] gorm, [https://gorm.io/](https://gorm.io/)
 - [x] swagger, [https://github.com/swaggo/gin-swagger](https://github.com/swaggo/gin-swagger)
 - [x] jwt, [https://github.com/golang-jwt/jwt](https://github.com/golang-jwt/jwt)
+- [x] vue3, [https://v3.vuejs.org/](https://v3.vuejs.org/)
 
 ## System
 
