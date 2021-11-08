@@ -2,6 +2,8 @@ package main
 
 import (
 	"flag"
+	"io"
+	"os"
 	"this/server"
 	"this/tray"
 
@@ -27,6 +29,11 @@ func main() {
 		}
 	} else {
 		gin.SetMode(gin.ReleaseMode)
+		gin.DisableConsoleColor()
+
+		f, _ := os.Create("gin.log")
+		gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
+
 		if *hasTray == 1 {
 			tray.Run(func() {
 				if *autoStart == 1 {
